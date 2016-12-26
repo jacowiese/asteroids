@@ -25,6 +25,10 @@ class ASTEROIDS_API AAsteroid : public AStaticMeshActor
 {
 	GENERATED_BODY()
 	
+private:
+	UPROPERTY(EditAnywhere, Category = Properties)
+	float Health = 100.0f;
+
 public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
@@ -33,5 +37,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 	EAsteroidType asteroidType;
 	
+	UFUNCTION(BlueprintCallable, Category = Health)
+	void TakeHit(float damage);
 	
+	UFUNCTION(BlueprintImplementableEvent, Category = Health)
+	void OnAsteroidDestroyed();
+
 };

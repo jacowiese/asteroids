@@ -29,6 +29,7 @@ public:
 
 	float GetProjectileSpeed();
 
+	UFUNCTION(BlueprintCallable, Category = DamageSystem)
 	float GetProjectileDamage();
 	
 };
