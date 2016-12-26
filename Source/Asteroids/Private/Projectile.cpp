@@ -29,3 +29,7 @@ float AProjectile::GetProjectileSpeed() {
 	return ProjectileSpeed;
 }
 
+// Get Projectile Damage
+float AProjectile::GetProjectileDamage() {
+	return ProjectileDamage;
+}

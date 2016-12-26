@@ -14,6 +14,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = WeaponSystem)
 	float ProjectileSpeed = 1500.0f;
 
+	UPROPERTY(EditAnywhere, Category = WeaponSystem)
+	float ProjectileDamage = 6.0f;
+
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();
@@ -25,5 +28,7 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	float GetProjectileSpeed();
+
+	float GetProjectileDamage();
 	
 };

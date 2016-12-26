@@ -13,7 +13,8 @@ UENUM(BlueprintType)
 enum class EAsteroidType : uint8 {
 	SMALL,
 	MEDIUM,
-	LARGE
+	LARGE,
+	XLARGE
 };
 
 /**
@@ -25,6 +26,9 @@ class ASTEROIDS_API AAsteroid : public AStaticMeshActor
 	GENERATED_BODY()
 	
 public:
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void InitialiseAsteroid(EAsteroidType asteroidType);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 	EAsteroidType asteroidType;
