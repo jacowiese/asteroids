@@ -15,7 +15,7 @@ private:
 	float ProjectileSpeed = 1500.0f;
 
 	UPROPERTY(EditAnywhere, Category = WeaponSystem)
-	float ProjectileDamage = 6.0f;
+	float ProjectileDamage = 4.0f;
 
 public:	
 	// Sets default values for this actor's properties

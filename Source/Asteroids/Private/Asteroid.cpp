@@ -5,6 +5,8 @@
 
 
 void AAsteroid::InitialiseAsteroid(EAsteroidType asteroidType) {
+	this->asteroidType = asteroidType;
+
 	float asteroidScale = 0.3f;
 	Health = 1.0f;
 
