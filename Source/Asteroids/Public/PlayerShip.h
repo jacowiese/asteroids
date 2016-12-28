@@ -53,5 +53,5 @@ public:
 	void ThrustShip(float inputVal);
 
 	UFUNCTION(BlueprintCallable, Category = WeaponSystem)
-	void FireMainWeapon();
+	bool FireMainWeapon();
 };

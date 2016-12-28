@@ -44,12 +44,13 @@ void APlayerShip::ThrustShip(float inputVal) {
 	pc->AddForceAtLocation(direction, pc->GetSocketLocation(FName("Thrusters")));
 }
 
-void APlayerShip::FireMainWeapon() {
+bool APlayerShip::FireMainWeapon() {
+	bool shotFired = false;
 	float gameTime = GetWorld()->GetTimeSeconds();
 	if (gameTime - lastFireTime >= FireRate) {
 
 		UStaticMeshComponent *shipMesh = Cast<UStaticMeshComponent>(GetRootComponent());
-		if (!shipMesh) return;
+		if (!shipMesh) return shotFired;
 
 		FVector loc = shipMesh->GetSocketLocation(FName("MainGun"));
 		FRotator rot = GetActorRotation();
@@ -63,9 +64,12 @@ void APlayerShip::FireMainWeapon() {
 				FVector forward = GetActorForwardVector();
 				FVector projectileDirection = FVector(-forward.Y, forward.X, forward.Z);
 				projectilePC->AddImpulse(projectileDirection * projectileSpeed);
+				shotFired = true;
 			}
 		}
 
 		lastFireTime = gameTime;
 	}
+
+	return shotFired;
 }
