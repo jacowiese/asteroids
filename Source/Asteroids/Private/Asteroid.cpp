@@ -1,8 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Asteroids.h"
+#include "AsteroidGameState.h"
 #include "Asteroid.h"
 
+
+AAsteroid::AAsteroid() {
+	PrimaryActorTick.bCanEverTick = true;
+}
 
 void AAsteroid::InitialiseAsteroid(EAsteroidType asteroidType) {
 	this->asteroidType = asteroidType;
@@ -43,4 +48,38 @@ void AAsteroid::TakeHit(float damage) {
 		Health = -1.0f;
 		OnAsteroidDestroyed();
 	}
+}
+
+void AAsteroid::Tick(float DeltaSeconds) {
+	WrapToPlayfield();
+}
+
+void AAsteroid::WrapToPlayfield() {
+
+	AAsteroidGameState *gameState = Cast<AAsteroidGameState>(GetWorld()->GetGameState());
+	FVector location = GetActorLocation();
+	bool locationChanged = false;
+
+	if (location.X < -gameState->PlayfieldSize) {
+		location.X = gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+	else if (location.X > gameState->PlayfieldSize) {
+		location.X = -gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+
+	if (location.Y < -gameState->PlayfieldSize) {
+		location.Y = gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+	else if (location.Y > gameState->PlayfieldSize) {
+		location.Y = -gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+
+	if (locationChanged) {
+		SetActorLocation(location);
+	}
+
 }

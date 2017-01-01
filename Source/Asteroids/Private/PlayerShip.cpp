@@ -2,6 +2,7 @@
 
 #include "Asteroids.h"
 #include "Projectile.h"
+#include "AsteroidGameState.h"
 #include "PlayerShip.h"
 
 // Sets default values
@@ -22,6 +23,8 @@ void APlayerShip::BeginPlay()
 void APlayerShip::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+
+	WrapToPlayfield();
 }
 
 // Called to bind functionality to input
@@ -72,4 +75,34 @@ bool APlayerShip::FireMainWeapon() {
 	}
 
 	return shotFired;
+}
+
+void APlayerShip::WrapToPlayfield() {
+	
+	AAsteroidGameState *gameState = Cast<AAsteroidGameState>(GetWorld()->GetGameState());
+	FVector location = GetActorLocation();
+	bool locationChanged = false;
+
+	if (location.X < -gameState->PlayfieldSize) {
+		location.X = gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+	else if (location.X > gameState->PlayfieldSize) {
+		location.X = -gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+
+	if (location.Y < -gameState->PlayfieldSize) {
+		location.Y = gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+	else if (location.Y > gameState->PlayfieldSize) {
+		location.Y = -gameState->PlayfieldSize;
+		locationChanged = true;
+	}
+
+	if (locationChanged) {
+		SetActorLocation(location);
+	}
+
 }

@@ -30,6 +30,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = WeaponSystem)
 	TSubclassOf<AProjectile> mainGunProjectile;
 
+	void WrapToPlayfield();
+
 public:
 	UPROPERTY(BlueprintReadonly, Category = Status)
 		float ShipCurrentHealth;

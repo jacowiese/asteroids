@@ -29,7 +29,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = Properties)
 	float Health = 100.0f;
 
+	void WrapToPlayfield();
+
 public:
+
+	AAsteroid();
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void InitialiseAsteroid(EAsteroidType asteroidType);
@@ -42,5 +46,7 @@ public:
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = Health)
 	void OnAsteroidDestroyed();
+
+	virtual void Tick(float DeltaSeconds) override;
 
 };
