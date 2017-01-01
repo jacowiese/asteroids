@@ -4,11 +4,11 @@
 #include "Asteroid.h"
 #include "AsteroidGameState.h"
 
-void AAsteroidGameState::SpawnLevelAsteroids(TSubclassOf<AAsteroid> AsteroidType, int numberToSpawn, float playfieldSize) {
+void AAsteroidGameState::SpawnLevelAsteroids(TSubclassOf<AAsteroid> AsteroidType, int numberToSpawn) {
 	for (int i = 0; i < numberToSpawn; i++) {
 
 		FTransform transform;
-		FVector newLocation = FMath::VRand() * playfieldSize;
+		FVector newLocation = FMath::VRand() * PlayfieldSize;
 		newLocation.Z = 0.0f;
 		transform.SetLocation(newLocation);
 
@@ -17,9 +17,6 @@ void AAsteroidGameState::SpawnLevelAsteroids(TSubclassOf<AAsteroid> AsteroidType
 
 		auto asteroid = Cast<AAsteroid>(GetWorld()->SpawnActor(AsteroidType, &transform, spawnParameters));
 		if (asteroid != nullptr) {
-			FVector newLocation = FMath::VRand() * playfieldSize;
-			newLocation.Z = 0.0f;
-			asteroid->SetActorLocation(newLocation);
 			asteroid->InitialiseAsteroid(EAsteroidType::XLARGE);
 
 			Asteroids.Add(asteroid);

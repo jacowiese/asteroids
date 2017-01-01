@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Asteroids.h"
+#include "AsteroidGameState.h"
 #include "Projectile.h"
 
 
@@ -23,20 +24,20 @@ void AProjectile::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-	float playfieldSize = 5000.0f; // TODO: Remove magic playfield size and set up correctly in blueprint
-
+	// Check if projectile is outside of play field then destroy
+	AAsteroidGameState *gameState = Cast<AAsteroidGameState>(GetWorld()->GetGameState());
 	bool toBeDestroyed = false;
 	FVector location = GetActorLocation();
-	if (location.X < -playfieldSize) {
+	if (location.X < -gameState->PlayfieldSize) {
 		toBeDestroyed = true;
 	}
-	if (location.Y < -playfieldSize) {
+	if (location.Y < -gameState->PlayfieldSize) {
 		toBeDestroyed = true;
 	}
-	if (location.X > playfieldSize) {
+	if (location.X > gameState->PlayfieldSize) {
 		toBeDestroyed = true;
 	}
-	if (location.Y > playfieldSize) {
+	if (location.Y > gameState->PlayfieldSize) {
 		toBeDestroyed = true;
 	}
 
