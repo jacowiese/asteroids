@@ -22,6 +22,27 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+
+	float playfieldSize = 5000.0f; // TODO: Remove magic playfield size and set up correctly in blueprint
+
+	bool toBeDestroyed = false;
+	FVector location = GetActorLocation();
+	if (location.X < -playfieldSize) {
+		toBeDestroyed = true;
+	}
+	if (location.Y < -playfieldSize) {
+		toBeDestroyed = true;
+	}
+	if (location.X > playfieldSize) {
+		toBeDestroyed = true;
+	}
+	if (location.Y > playfieldSize) {
+		toBeDestroyed = true;
+	}
+
+	if (toBeDestroyed) {
+		GetWorld()->DestroyActor(this);
+	}
 }
 
 // Get Projectile Speed
