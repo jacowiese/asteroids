@@ -31,8 +31,10 @@ void AAsteroid::InitialiseAsteroid(EAsteroidType asteroidType) {
 		Health = 6.0f;
 		break;
 	}
-
 	SetActorScale3D(FVector(asteroidScale));
+
+	FVector rotation = FMath::VRand();
+	SetActorRotation(rotation.Rotation());
 }
 
 void AAsteroid::TakeHit(float damage) {
