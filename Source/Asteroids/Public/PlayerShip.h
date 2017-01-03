@@ -14,16 +14,10 @@ class ASTEROIDS_API APlayerShip : public APawn
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxHealth = 100.0f;
-
-	UPROPERTY(EditAnywhere, Category = Setup)
 	float TurnRate = 165.0f;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float ThrustRate = 6.0f;
-
-	UPROPERTY(EditAnywhere, Category = WeaponSystem)
-	float FireRate = 0.250f;
 
 	float lastFireTime = 0.0f;
 
@@ -33,8 +27,20 @@ private:
 	void WrapToPlayfield();
 
 public:
-	UPROPERTY(BlueprintReadonly, Category = Status)
-		float ShipCurrentHealth;
+	UPROPERTY(EditAnywhere, Category = Setup)
+	float MaxHealth = 100.0f;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	float ShipCurrentHealth = MaxHealth;
+
+	UPROPERTY(EditAnywhere, Category = WeaponSystem)
+	float MaxFireRate = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = WeaponSystem)
+	float MinFireRate = 0.15f;
+
+	UPROPERTY(EditAnywhere, Category = WeaponSystem)
+	float FireRate = MaxFireRate;
 
 	// Sets default values for this pawn's properties
 	APlayerShip();
