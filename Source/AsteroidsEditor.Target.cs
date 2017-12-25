@@ -5,21 +5,11 @@ using System.Collections.Generic;
 
 public class AsteroidsEditorTarget : TargetRules
 {
-	public AsteroidsEditorTarget(TargetInfo Target)
-	{
-		Type = TargetType.Editor;
-	}
 
-	//
-	// TargetRules interface.
-	//
+    public AsteroidsEditorTarget(TargetInfo Target) : base(Target)
+    {
+        Type = TargetType.Editor;
+        ExtraModuleNames.Add("Asteroids");
+    }
 
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "Asteroids" } );
-	}
 }

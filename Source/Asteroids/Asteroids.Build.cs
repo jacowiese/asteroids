@@ -4,7 +4,7 @@ using UnrealBuildTool;
 
 public class Asteroids : ModuleRules
 {
-	public Asteroids(TargetInfo Target)
+	public Asteroids(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
