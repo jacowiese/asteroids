@@ -24,7 +24,8 @@ void APlayerShip::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-	WrapToPlayfield();
+	// Enable this to wrap to playfield (not required with new asteroid field)
+	//WrapToPlayfield();
 }
 
 // Called to bind functionality to input

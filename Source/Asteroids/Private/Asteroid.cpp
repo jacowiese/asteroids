@@ -51,7 +51,9 @@ void AAsteroid::TakeHit(float damage) {
 }
 
 void AAsteroid::Tick(float DeltaSeconds) {
-	WrapToPlayfield();
+	
+	// Enable this to wrap to playfield (not required with new asteroid field)
+	//WrapToPlayfield();
 }
 
 void AAsteroid::WrapToPlayfield() {
