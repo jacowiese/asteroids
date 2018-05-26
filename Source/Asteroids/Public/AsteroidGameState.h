@@ -30,6 +30,9 @@ public:
 	void SpawnAsteroidsAtLocation(TSubclassOf<AAsteroid> AsteroidClass, FVector location, EAsteroidType curAsteroidType, int numberToSpawn);
 
 	UFUNCTION(BlueprintCallable, Category = Game)
+	void SpawnAsteroidsAtParent(TSubclassOf<AAsteroid> AsteroidClass, AAsteroid* parentAsteroid, EAsteroidType curAsteroidType, int numberToSpawn);
+
+	UFUNCTION(BlueprintCallable, Category = Game)
 	void DestroyAsteroid(AAsteroid *asteroidToDestroy);
 
 	UFUNCTION(BlueprintCallable, Category = Game)

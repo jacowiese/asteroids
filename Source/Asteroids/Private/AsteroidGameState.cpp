@@ -56,6 +56,43 @@ void AAsteroidGameState::SpawnAsteroidsAtLocation(TSubclassOf<AAsteroid> Asteroi
 	}
 }
 
+void AAsteroidGameState::SpawnAsteroidsAtParent(TSubclassOf<AAsteroid> AsteroidClass, AAsteroid* parentAsteroid, EAsteroidType curAsteroidType, int numberToSpawn) {
+
+	EAsteroidType toSpawnType;
+	switch (curAsteroidType) {
+	case EAsteroidType::XLARGE:
+		toSpawnType = EAsteroidType::LARGE;
+		break;
+	case EAsteroidType::LARGE:
+		toSpawnType = EAsteroidType::MEDIUM;
+		break;
+	case EAsteroidType::MEDIUM:
+		toSpawnType = EAsteroidType::SMALL;
+		break;
+	case EAsteroidType::SMALL:
+		return; // When the current asteroid is SMALL, get out, nothing to spawn
+	}
+
+	for (int i = 0; i < numberToSpawn; i++) {
+		FTransform transform;
+		transform.SetLocation(parentAsteroid->GetActorLocation());
+
+		FActorSpawnParameters spawnParameters;
+		spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		AAsteroid* asteroid = Cast<AAsteroid>(GetWorld()->SpawnActor(AsteroidClass, &transform, spawnParameters));
+		if (asteroid != nullptr) {
+
+			UStaticMeshComponent *staticMesh = asteroid->GetStaticMeshComponent();
+			staticMesh->ComponentVelocity = parentAsteroid->GetVelocity() * 0.1f;
+
+			asteroid->InitialiseAsteroid(toSpawnType);
+
+			Asteroids.Add(asteroid);
+		}
+	}
+}
+
 void AAsteroidGameState::DestroyAsteroid(AAsteroid *asteroidToDestroy) {
 	for (int i = 0; i < Asteroids.Num(); i++) {
 		if (Asteroids[i] == asteroidToDestroy) {
