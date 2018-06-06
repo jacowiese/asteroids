@@ -23,6 +23,11 @@ void AProjectile::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	Life -= DeltaTime;
+	if (Life <= 0)
+	{
+		Destroy(this);
+	}
 }
 
 // Get Projectile Speed

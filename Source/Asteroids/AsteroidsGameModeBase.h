@@ -15,6 +15,12 @@ class ASTEROIDS_API AAsteroidsGameModeBase : public AGameModeBase
 	
 public:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game")
+	bool GameInPlay = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game")
+	int NumberOfAsteroids = 3;
+
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 	
 	virtual void InitGameState() override;

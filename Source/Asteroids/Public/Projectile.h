@@ -11,11 +11,14 @@ class ASTEROIDS_API AProjectile : public AActor
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditAnywhere, Category = WeaponSystem)
+	UPROPERTY(EditAnywhere, Category = "WeaponSystem")
 	float ProjectileSpeed = 1500.0f;
 
-	UPROPERTY(EditAnywhere, Category = WeaponSystem)
+	UPROPERTY(EditAnywhere, Category = "WeaponSystem")
 	float ProjectileDamage = 4.0f;
+
+	UPROPERTY(EditAnywhere, Category = "WeaponSystem")
+	float Life = 3.0f;
 
 public:	
 	// Sets default values for this actor's properties
@@ -29,7 +32,7 @@ public:
 
 	float GetProjectileSpeed();
 
-	UFUNCTION(BlueprintCallable, Category = DamageSystem)
+	UFUNCTION(BlueprintCallable, Category = "DamageSystem")
 	float GetProjectileDamage();
 	
 };
